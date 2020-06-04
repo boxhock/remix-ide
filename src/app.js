@@ -42,7 +42,7 @@ import { basicLogo } from './app/ui/svgLogo'
 import { RunTab, makeUdapp } from './app/udapp'
 
 import PanelsResize from './lib/panels-resize'
-import { Engine } from '@remixproject/engine'
+import { Engine, WebsocketPlugin } from '@remixproject/engine'
 import { RemixAppManager } from './remixAppManager'
 import { FramingService } from './framingService'
 import { MainView } from './app/panels/main-view'
@@ -155,6 +155,7 @@ class App {
 
     self._components.filesProviders['localhost'] = new RemixDProvider(self.appManager)
     registry.put({api: self._components.filesProviders['localhost'], name: 'fileproviders/localhost'})
+    console.log('self._components.filesProviders: ', self._components.filesProviders)
     registry.put({api: self._components.filesProviders, name: 'fileproviders'})
 
     migrateFileSystem(self._components.filesProviders['browser'])
@@ -240,6 +241,7 @@ Please make a backup of your contracts and start using http://remix.ethereum.org
   const pluginLoader = appManager.pluginLoader
   const workspace = pluginLoader.get()
   const engine = new Engine(appManager)
+  
   await engine.onload()
 
   // SERVICES
@@ -300,6 +302,7 @@ Please make a backup of your contracts and start using http://remix.ethereum.org
   makeUdapp(blockchain, compilersArtefacts, (domEl) => terminal.logHtml(domEl))
 
   const contextualListener = new ContextualListener({editor})
+  const { remixd } = self._components
 
   engine.register([
     contentImport,
@@ -313,7 +316,8 @@ Please make a backup of your contracts and start using http://remix.ethereum.org
     contextualListener,
     terminal,
     web3Provider,
-    fetchAndCompile
+    fetchAndCompile,
+    remixd
   ])
 
   // LAYOUT & SYSTEM VIEWS
