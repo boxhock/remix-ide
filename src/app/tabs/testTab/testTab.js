@@ -8,16 +8,16 @@ class TestTabLogic {
     this.currentPath = 'browser/tests'
   }
 
-  setCurrentPath(path) {
-    if (path.indexOf('/') == 0) return
+  setCurrentPath (path) {
+    if (path.indexOf('/') === 0) return
     this.currentPath = path
     const fileProvider = this.fileManager.fileProviderOf(path.split('/')[0])
-    fileProvider.exists(path, (err, res) => { if(!res) fileProvider.createDir(path)}) 
+    fileProvider.exists(path, (e, res) => { if (!res) fileProvider.createDir(path) })
   }
 
   generateTestFile () {
     let fileName = this.fileManager.currentFile()
-    const hasCurrent = !!fileName && this.fileManager.currentFile().split('.').pop().toLowerCase() == 'sol'
+    const hasCurrent = !!fileName && this.fileManager.currentFile().split('.').pop().toLowerCase() === 'sol'
     if (!hasCurrent) fileName = this.currentPath + '/newFile.sol'
     const fileProvider = this.fileManager.fileProviderOf(this.currentPath)
     if (!fileProvider) return
@@ -51,7 +51,7 @@ class TestTabLogic {
   // 'contractName' should be <compiledContractName> + '_testSuite'
   generateTestContractSample (hasCurrent, fileToImport, contractName = 'testSuite') {
     let relative = remixPath.relative(this.currentPath, remixPath.dirname(fileToImport))
-    if (relative == '') relative = '.'
+    if (relative === '') relative = '.'
     const comment = hasCurrent ? `import "${relative}/${remixPath.basename(fileToImport)}";` : '// Import here the file to test.'
     return `pragma solidity >=0.4.22 <0.7.0;
 import "remix_tests.sol"; // this import is automatically injected by Remix.

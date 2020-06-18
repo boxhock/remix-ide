@@ -57,10 +57,6 @@ module.exports = class TestTab extends ViewPlugin {
     })
 
     this.fileManager.events.on('noFileSelected', () => {
-      //this.updateGenerateFileAction()
-      //this.updateRunAction()
-      //this.updateTestFileList()
-      // todo no need for this
     })
 
     this.fileManager.events.on('currentFileChanged', (file, provider) => this.updateForNewCurrent(file))
@@ -354,7 +350,7 @@ module.exports = class TestTab extends ViewPlugin {
     })
   }
 
-  updateCurrentPath(e) {
+  updateCurrentPath (e) {
     this.testTabLogic.setCurrentPath(e.target.value)
     this.updateRunAction()
     this.updateForNewCurrent()
@@ -507,11 +503,11 @@ module.exports = class TestTab extends ViewPlugin {
           id="utPath"
           name="utPath"
           style="background-image: var(--primary);"
-          onchange=${(e)=>this.updateCurrentPath(e)}/>
+          onchange=${(e) => this.updateCurrentPath(e)}/>
           ${this.uiPathList}
       </div>
     `
-    let options = this.allPaths()
+    let options = ['browser', 'browser/test'] // this.allPaths()
     options.forEach((path) => {
       this.uiPathList.appendChild(yo`<option>${path}</option>`)
     })
