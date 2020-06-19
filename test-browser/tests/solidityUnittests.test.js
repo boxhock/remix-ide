@@ -31,9 +31,9 @@ module.exports = {
     .click('*[data-id="verticalIconsKindsolidityUnitTesting"]')
     .waitForElementPresent('*[data-id="testTabGenerateTestFile"]')
     .click('*[data-id="testTabGenerateTestFile"]')
-    .waitForElementPresent('*[title="browser/simple_storage_test.sol"]')
+    .waitForElementPresent('*[title="browser/tests/simple_storage_test.sol"]')
     .clickLaunchIcon('fileExplorers')
-    .removeFile('browser/simple_storage_test.sol')
+    .removeFile('browser/tests/simple_storage_test.sol')
   },
 
   'Should run simple unit test `simple_storage_test.sol` ': function (browser) {
@@ -46,13 +46,13 @@ module.exports = {
     .scrollAndClick('*[data-id="testTabRunTestsTabRunAction"]')
     .waitForElementPresent('*[data-id="testTabSolidityUnitTestsOutputheader"]', 80000)
     .pause(5000)
-    .assert.containsText('*[data-id="testTabSolidityUnitTestsOutput"]', 'MyTest (browser/simple_storage_test.sol)')
+    .assert.containsText('*[data-id="testTabSolidityUnitTestsOutput"]', 'MyTest (browser/tests/simple_storage_test.sol)')
     .assert.containsText('*[data-id="testTabSolidityUnitTestsOutput"]', '✓ Initial value should be100')
     .assert.containsText('*[data-id="testTabSolidityUnitTestsOutput"]', '✓ Value is set200')
     .assert.containsText('*[data-id="testTabSolidityUnitTestsOutput"]', '✘ Should fail for wrong value200')
     .assert.containsText('*[data-id="testTabSolidityUnitTestsOutput"]', 'Passing: 2')
     .assert.containsText('*[data-id="testTabSolidityUnitTestsOutput"]', 'Failing: 1')
-    .assert.containsText('*[data-id="testTabSolidityUnitTestsOutput"]', 'FAIL MyTest (browser/simple_storage_test.sol)')
+    .assert.containsText('*[data-id="testTabSolidityUnitTestsOutput"]', 'FAIL MyTest (browser/tests/simple_storage_test.sol)')
   },
 
   'Should run advance unit test using natspec and experimental ABIEncoderV2 `ks2b_test.sol` ': function (browser) {
@@ -66,7 +66,7 @@ module.exports = {
     .scrollAndClick('*[data-id="testTabRunTestsTabRunAction"]')
     .waitForElementPresent('*[data-id="testTabSolidityUnitTestsOutputheader"]', 40000)
     .pause(5000)
-    .assert.containsText('*[data-id="testTabSolidityUnitTestsOutput"]', 'browser/ks2b_test.sol')
+    .assert.containsText('*[data-id="testTabSolidityUnitTestsOutput"]', 'browser/tests/ks2b_test.sol')
     .assert.containsText('*[data-id="testTabSolidityUnitTestsOutput"]', '✓ Check project exists')
     .assert.containsText('*[data-id="testTabSolidityUnitTestsOutput"]', '✘ Check wrong project owner')
     .assert.containsText('*[data-id="testTabSolidityUnitTestsOutput"]', '✘ Check wrong sender')
@@ -89,9 +89,9 @@ module.exports = {
     .pause(1000)
     .assert.containsText('*[data-id="testTabRunTestsTabStopAction"]', 'Stopping')
     .waitForElementPresent('*[data-id="testTabSolidityUnitTestsOutputheader"]', 40000)
-    .assert.containsText('*[data-id="testTabSolidityUnitTestsOutput"]', 'browser/ks2b_test.sol')
-    .notContainsText('*[data-id="testTabSolidityUnitTestsOutput"]', 'browser/4_Ballot_test.sol')
-    .notContainsText('*[data-id="testTabSolidityUnitTestsOutput"]', 'browser/simple_storage_test.sol')
+    .assert.containsText('*[data-id="testTabSolidityUnitTestsOutput"]', 'browser/tests/ks2b_test.sol')
+    .notContainsText('*[data-id="testTabSolidityUnitTestsOutput"]', 'browser/tests/4_Ballot_test.sol')
+    .notContainsText('*[data-id="testTabSolidityUnitTestsOutput"]', 'browser/tests/simple_storage_test.sol')
     .pause(6000)
     .assert.containsText('*[data-id="testTabTestsExecutionStopped"]', 'The test execution has been stopped')
   },
@@ -157,7 +157,7 @@ function runTests (browser) {
     .waitForElementPresent('*[data-id="testTabSolidityUnitTestsOutputheader"]', 40000)
     .pause(5000)
     .waitForElementPresent('#solidityUnittestsOutput div[class^="testPass"]')
-    .assert.containsText('#solidityUnittestsOutput', 'browser/4_Ballot_test.sol')
+    .assert.containsText('#solidityUnittestsOutput', 'browser/tests/4_Ballot_test.sol')
     .assert.containsText('#solidityUnittestsOutput', '✓ Check winning proposal')
     .assert.containsText('#solidityUnittestsOutput', '✓ Check winnin proposal with return value')
     .end()
